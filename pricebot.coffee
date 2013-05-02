@@ -24,7 +24,7 @@ class Exchange extends EventEmitter
       price: normalizePrice price
       qty: qty
       time: new Date()
-    console.log "UPDATE", @name, @trade
+    console.log "UPDATE name=#{@name} " + ("#{k}=#{v}" for k,v of @trade).join(" ")
     @emit "updated", oldTrade, @trade
 
 class ExchangeList extends EventEmitter
@@ -78,22 +78,24 @@ coinbaseSource = (exchanges) ->
 
 # Bot
 
+frequency = parseInt(process.env["UPDATE_FREQUENCY"] or "60", 10)
+
 config =
   channels: process.env["IRC_CHANNELS"].split(/\s+/g)
   server: process.env["IRC_SERVER"]
   user: process.env["IRC_USER"]
 
-console.log config
+console.log "CONFIG", config
 
 channels = []
 
 bot = new irc.Client config.server, config.user, channels: config.channels
 bot.on "join", (channel, who) ->
-  console.log arguments
+  console.log "JOIN", channel, who
   if who is config.user
     channels.push channel
 bot.on 'error', (error) ->
-  console.log error
+  console.log "ERROR", error
 
 exchanges = new ExchangeList()#["mtgox", "btce", "bitcoin24", "bitfloor"])#, "coinbase"])
 
@@ -116,7 +118,7 @@ updateTopic = ->
 #     last = now
 #     updateTopic()
 
-setInterval updateTopic, 60*1000
+setInterval updateTopic, frequency*1000
 setTimeout updateTopic, 30*1000
 
 bitcoinWatchSource(exchanges)
