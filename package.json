@@ -1,0 +1,21 @@
+{
+  "name": "pricebot",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "pricebot.coffee",
+  "dependencies": {
+    "irc": "~0.3.6",
+    "socket.io-client": "~0.9.11",
+    "q": "~0.9.3",
+    "q-io": "~1.6.5"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.6.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}
