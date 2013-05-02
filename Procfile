@@ -1,1 +1,1 @@
-pricebot: ./node_modules/.bin/coffee pricebot.coffee
+worker: ./node_modules/.bin/coffee pricebot.coffee
