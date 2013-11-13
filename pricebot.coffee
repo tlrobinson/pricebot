@@ -1,13 +1,13 @@
 irc = require "irc"
 
+{ EventEmitter } = require 'events'
+
 # Exchange
 
 normalizePrice = (price) ->
   Math.round(parseFloat(price) * 100).toString(10).replace(/(\d{2})$/, ".$1")
 normalizeName = (name) ->
   name.toLowerCase().replace(/[^a-z0-9]/g, "")
-
-EventEmitter = require('events').EventEmitter
 
 class Exchange extends EventEmitter
   constructor: (name) ->
